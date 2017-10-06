@@ -1,0 +1,15 @@
+select
+        part.num as "PART",
+        sum(qohview.qty) as "INV"
+from
+        qohview
+        left join part on qohview.partid = part.id
+        left join locationgroup on qohview.locationgroupid = locationgroup.id
+        left join location on qohview.locationid = location.id
+where
+        qohview.locationgroupid in(3,6,31,49)
+        and qohview.locationid not in(247,717,1029,1086,1094,1095,1115,1140,1421)
+        and qohview.qty > 0
+	and PART.TYPEID = 10
+group by
+        part.num

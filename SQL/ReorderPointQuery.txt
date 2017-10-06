@@ -1,0 +1,6 @@
+Select partreorder.orderuptolevel as "Order Up To Level",
+        partreorder.reorderpoint as "Reorder Point",
+        part.num as "PART",
+        part.description as "Part Description"
+from partreorder
+        join part on partreorder.partid = part.id
