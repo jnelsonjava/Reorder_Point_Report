@@ -35,22 +35,28 @@ reorderInv.fillna(0, inplace=True)
 # filter to only lines where the inventory is less than or equal to the reorder point
 reorderInv = reorderInv[reorderInv['INV'] <= reorderInv['Reorder Point']].copy()
 # clean up the column order
-reorderINV = reorderInv[['PART', 'Part Description', 'INV', 'Reorder Point', 'Order Up To Level']]
+reorderINV = reorderInv[['PART', 'Part Description', 'INV', 'Reorder Point', 'Order Up To Level', 'Make/Buy']]
 # sort by part
 reorderINV.sort_values(by='PART', ascending=True, inplace=True)
+# split into make/buy
+reorderBuy = reorderINV[reorderINV['Make/Buy'] == 'Buy'].copy()
+reorderMake = reorderINV[reorderINV['Make/Buy'] == 'Make'].copy()
+
 
 # choose the excel filename
 reorderFilename = 'Current Reorder Parts.xlsx'
 
 # save to excel
 writer = pd.ExcelWriter(os.path.join(homey, reorderFilename))
-reorderINV.to_excel(writer, 'Sheet', index=False)
+reorderBuy.to_excel(writer, 'Buy Parts', index=False)
+reorderMake.to_excel(writer, 'Make Parts', index=False)
 writer.save()
 
 
 
 # import email_tool
 
-# reorderRecipientList = ['tvay.com','jnelson@commnetsystems.com']
+# reorderRecipientList = ['jnelson@commnetsystems.com'] # for testing purposes
+# reorderRecipientList = ['tvay@commnetsystems.com','jnelson@commnetsystems.com','mfreeling@commnetsystems.com']
 
 # email_tool.send_email(reorderRecipientList, reorderFilename)

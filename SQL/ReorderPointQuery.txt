@@ -1,6 +1,11 @@
 Select partreorder.orderuptolevel as "Order Up To Level",
         partreorder.reorderpoint as "Reorder Point",
         part.num as "PART",
-        part.description as "Part Description"
+        part.description as "Part Description",
+        customset.info as "Make/Buy"
 from partreorder
         join part on partreorder.partid = part.id
+        join customset on part.id = customset.recordid
+where customset.customfieldid = 64
+        and part.activeflag = True
+        and partreorder.locationgroupid = 6
