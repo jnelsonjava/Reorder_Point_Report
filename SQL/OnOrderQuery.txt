@@ -1,0 +1,14 @@
+select part.num as "PART",
+        sum(qtyinventory.qtyonorderpo + qtyinventory.qtyonordermo) as "On Order"
+        /* Only looking at POs and MOs to find on order info.
+           Ignoring TOs and SOs.*/
+        
+from qtyinventory
+        join part on qtyinventory.partid = part.id
+
+/*        
+Not currently limiting by location group.  But below are the usual limiters if needed:
+where qtyinventory.locationgroupid in(6,23,49)
+*/
+
+group by part.num
