@@ -1,3 +1,4 @@
 *.xlsx
 email_tool.py
 *.ipynb
+*.pyc
