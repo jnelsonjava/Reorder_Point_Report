@@ -64,11 +64,11 @@ writer.save()
 
 
 
-# import email_tool
+import email_tool
 
-# reorderRecipientList = ['jnelson@commnetsystems.com'] # for testing purposes
-# reorderRecipientList = ['tvay@commnetsystems.com','jnelson@commnetsystems.com','mfreeling@commnetsystems.com']
+reorderRecipientList = ['jnelson@commnetsystems.com','vbratcher@commnetsystems.com'] # for testing purposes
+# reorderRecipientList = ['tvay@commnetsystems.com','jnelson@commnetsystems.com','mfreeling@commnetsystems.com','jmayhle@commnetsystems.com']
 
-# email_tool.send_email(reorderRecipientList, reorderFilename)
+email_tool.send_email(reorderRecipientList, reorderFilename)
 
 print('Reorder report done!')
